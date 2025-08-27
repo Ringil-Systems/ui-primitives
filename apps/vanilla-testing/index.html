@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanilla JS UI Primitives - Testing</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+    
+    .section {
+      margin-bottom: 40px;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+    
+    .section h2 {
+      margin-top: 0;
+      color: #555;
+    }
+    
+    /* Accordion styles */
+    [data-accordion-item] {
+      border: 1px solid #ddd;
+      margin-bottom: 8px;
+      border-radius: 4px;
+    }
+    
+    [data-accordion-trigger] {
+      width: 100%;
+      padding: 12px 16px;
+      background: #f8f9fa;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    
+    [data-accordion-trigger]:hover {
+      background: #e9ecef;
+    }
+    
+    [data-accordion-content] {
+      padding: 16px;
+      border-top: 1px solid #ddd;
+    }
+    
+    [data-accordion-content][hidden] {
+      display: none;
+    }
+    
+    /* Dialog styles */
+    [data-dialog-overlay] {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    [data-dialog-overlay][hidden] {
+      display: none;
+    }
+    
+    [data-dialog-content] {
+      background: white;
+      padding: 24px;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    
+    /* Dropdown Menu styles */
+    #dropdown-menu {
+      position: relative;
+      display: inline-block;
+    }
+    
+    [data-dropdown-content] {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      min-width: 150px;
+      z-index: 1000;
+    }
+    
+    [data-dropdown-content][hidden] {
+      display: none;
+    }
+    
+    [data-dropdown-item] {
+      padding: 8px 12px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+    
+    [data-dropdown-item]:hover {
+      background: #f5f5f5;
+    }
+    
+    [data-dropdown-item]:focus {
+      background: #e9ecef;
+      outline: none;
+    }
+    
+    /* Checkbox styles */
+    [data-checkbox-trigger] {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    [data-checkbox-trigger]:hover {
+      border-color: #007bff;
+    }
+    
+    [data-checkbox-trigger][data-state="checked"] {
+      background: #007bff;
+      border-color: #007bff;
+      color: white;
+    }
+    
+    [data-checkbox-trigger][data-state="indeterminate"] {
+      background: #6c757d;
+      border-color: #6c757d;
+      color: white;
+    }
+    
+    [data-checkbox-trigger][data-disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    [data-checkbox-indicator] {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    [data-checkbox-indicator][hidden] {
+      display: none;
+    }
+    
+    /* Radio Group styles */
+    #radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    [data-radio-group-item] {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    [data-radio] {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ddd;
+      border-radius: 50%;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    [data-radio]:hover {
+      border-color: #007bff;
+    }
+    
+    [data-radio][data-state="checked"] {
+      border-color: #007bff;
+    }
+    
+    [data-radio][data-disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    [data-radio-indicator] {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: transparent;
+      transition: background-color 0.2s;
+    }
+    
+    [data-radio-indicator][data-state="checked"] {
+      background: #007bff;
+    }
+    
+    [data-radio-indicator][data-disabled] {
+      opacity: 0.5;
+    }
+    
+    /* Separator styles */
+    [data-orientation="horizontal"] {
+      width: 100%;
+      height: 1px;
+      background: #ddd;
+    }
+    
+    [data-orientation="vertical"] {
+      width: 1px;
+      height: 100%;
+      background: #ddd;
+    }
+    
+    [data-dialog-trigger] {
+      padding: 8px 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    [data-dialog-trigger]:hover {
+      background: #0056b3;
+    }
+    
+    [data-dialog-close] {
+      padding: 8px 16px;
+      background: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+    
+    [data-dialog-close]:hover {
+      background: #545b62;
+    }
+    
+    .button {
+      padding: 8px 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+    
+    .button:hover {
+      background: #0056b3;
+    }
+    
+    .button.secondary {
+      background: #6c757d;
+    }
+    
+    .button.secondary:hover {
+      background: #545b62;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Vanilla JS UI Primitives</h1>
+    
+    <div class="section">
+      <h2>Accordion Component</h2>
+      <p>Testing the vanilla JavaScript accordion component:</p>
+      
+      <div id="accordion">
+        <div data-accordion-item data-value="one">
+          <button data-accordion-trigger>Section One</button>
+          <div data-accordion-content>
+            <p>This is the content for section one. It can contain any HTML content.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+        
+        <div data-accordion-item data-value="two">
+          <button data-accordion-trigger>Section Two</button>
+          <div data-accordion-content>
+            <p>This is the content for section two.</p>
+            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+        </div>
+        
+        <div data-accordion-item data-value="three" disabled>
+          <button data-accordion-trigger>Section Three (Disabled)</button>
+          <div data-accordion-content>
+            <p>This section is disabled and cannot be opened.</p>
+          </div>
+        </div>
+        
+        <div data-accordion-item data-value="four">
+          <button data-accordion-trigger>Section Four</button>
+          <div data-accordion-content>
+            <p>This is the content for section four.</p>
+            <button class="button">A button inside accordion content</button>
+          </div>
+        </div>
+      </div>
+      
+      <div style="margin-top: 20px;">
+        <button class="button" onclick="accordion.openItem('one')">Open Section One</button>
+        <button class="button" onclick="accordion.closeItem('one')">Close Section One</button>
+        <button class="button" onclick="accordion.openItem('two')">Open Section Two</button>
+        <button class="button secondary" onclick="console.log('Current value:', accordion.getValue())">Log Current Value</button>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>Dialog Component</h2>
+      <p>Testing the vanilla JavaScript dialog component:</p>
+      
+      <button data-dialog-trigger>Open Dialog</button>
+      
+      <div data-dialog-overlay hidden>
+        <div data-dialog-content>
+          <h3 data-dialog-title>Dialog Title</h3>
+          <p data-dialog-description>This is a dialog description. It explains what the dialog is for.</p>
+          <p>This dialog demonstrates the vanilla JavaScript implementation of the Radix UI Dialog primitive.</p>
+          <p>Features include:</p>
+          <ul>
+            <li>Focus management</li>
+            <li>Escape key to close</li>
+            <li>Click outside to close</li>
+            <li>ARIA attributes</li>
+            <li>Keyboard navigation</li>
+          </ul>
+          <button data-dialog-close>Close Dialog</button>
+        </div>
+      </div>
+      
+      <div style="margin-top: 20px;">
+        <button class="button" onclick="dialog.open()">Open Dialog Programmatically</button>
+        <button class="button" onclick="dialog.close()">Close Dialog Programmatically</button>
+        <button class="button secondary" onclick="console.log('Dialog open:', dialog.isOpen())">Log Dialog State</button>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>Multiple Accordion Example</h2>
+      <p>Testing multiple accordion type:</p>
+      
+      <div id="multiple-accordion">
+        <div data-accordion-item data-value="a">
+          <button data-accordion-trigger>Item A</button>
+          <div data-accordion-content>
+            <p>Content for item A</p>
+          </div>
+        </div>
+        
+        <div data-accordion-item data-value="b">
+          <button data-accordion-trigger>Item B</button>
+          <div data-accordion-content>
+            <p>Content for item B</p>
+          </div>
+        </div>
+        
+        <div data-accordion-item data-value="c">
+          <button data-accordion-trigger>Item C</button>
+          <div data-accordion-content>
+            <p>Content for item C</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>Dropdown Menu Component</h2>
+      <p>Testing the vanilla JavaScript dropdown menu component:</p>
+      
+      <div id="dropdown-menu">
+        <button data-dropdown-trigger>Open Menu</button>
+        <div data-dropdown-content hidden>
+          <div data-dropdown-item data-value="edit">Edit</div>
+          <div data-dropdown-item data-value="duplicate">Duplicate</div>
+          <div data-dropdown-item data-value="archive">Archive</div>
+          <div data-dropdown-item data-value="delete">Delete</div>
+        </div>
+      </div>
+      
+      <div style="margin-top: 20px;">
+        <button class="button" onclick="dropdownMenu.open()">Open Menu Programmatically</button>
+        <button class="button" onclick="dropdownMenu.close()">Close Menu Programmatically</button>
+        <button class="button secondary" onclick="console.log('Menu open:', dropdownMenu.isOpen())">Log Menu State</button>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>Form Components</h2>
+      <p>Testing vanilla JavaScript form components:</p>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+          <h3>Checkbox</h3>
+          <div id="checkbox">
+            <button data-checkbox-trigger>
+              <span data-checkbox-indicator>✓</span>
+            </button>
+            <input type="checkbox" hidden />
+          </div>
+          
+          <div style="margin-top: 10px;">
+            <button class="button" onclick="checkbox.toggle()">Toggle</button>
+            <button class="button" onclick="checkbox.setIndeterminate(true)">Set Indeterminate</button>
+            <button class="button secondary" onclick="console.log('Checked:', checkbox.getChecked())">Log State</button>
+          </div>
+        </div>
+        
+        <div>
+          <h3>Label</h3>
+          <label id="label" for="test-input">Test Label</label>
+          <input id="test-input" type="text" placeholder="Test input" />
+        </div>
+      </div>
+      
+      <div style="margin-top: 20px;">
+        <h3>Separator</h3>
+        <div id="separator-horizontal" style="height: 1px; background: #ddd;"></div>
+        <div style="display: flex; align-items: center; height: 100px;">
+          <span>Content</span>
+          <div id="separator-vertical" style="width: 1px; height: 50px; background: #ddd; margin: 0 10px;"></div>
+          <span>More Content</span>
+        </div>
+        
+        <div style="margin-top: 10px;">
+          <button class="button" onclick="separatorHorizontal.setOrientation('vertical')">Set Vertical</button>
+          <button class="button" onclick="separatorHorizontal.setOrientation('horizontal')">Set Horizontal</button>
+          <button class="button secondary" onclick="console.log('Orientation:', separatorHorizontal.getOrientation())">Log Orientation</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>Radio Group Component</h2>
+      <p>Testing the vanilla JavaScript radio group component:</p>
+      
+      <div id="radio-group">
+        <div data-radio-group-item data-value="one">
+          <button data-radio>Option One</button>
+          <span data-radio-indicator></span>
+        </div>
+        <div data-radio-group-item data-value="two">
+          <button data-radio>Option Two</button>
+          <span data-radio-indicator></span>
+        </div>
+        <div data-radio-group-item data-value="three">
+          <button data-radio>Option Three</button>
+          <span data-radio-indicator></span>
+        </div>
+      </div>
+      
+      <div style="margin-top: 20px;">
+        <button class="button" onclick="radioGroup.setValue('two')">Select Option Two</button>
+        <button class="button" onclick="radioGroup.setValue('three')">Select Option Three</button>
+        <button class="button secondary" onclick="console.log('Selected value:', radioGroup.getValue())">Log Selected Value</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

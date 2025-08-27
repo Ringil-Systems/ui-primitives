@@ -1,0 +1,258 @@
+{
+  "name": "@radix-ui/vanilla",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Vanilla JavaScript UI primitives based on Radix UI",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./accordion": {
+      "import": {
+        "types": "./dist/accordion.d.mts",
+        "default": "./dist/accordion.mjs"
+      },
+      "require": {
+        "types": "./dist/accordion.d.ts",
+        "default": "./dist/accordion.js"
+      }
+    },
+    "./dialog": {
+      "import": {
+        "types": "./dist/dialog.d.mts",
+        "default": "./dist/dialog.mjs"
+      },
+      "require": {
+        "types": "./dist/dialog.d.ts",
+        "default": "./dist/dialog.js"
+      }
+    },
+    "./dropdown-menu": {
+      "import": {
+        "types": "./dist/dropdown-menu.d.mts",
+        "default": "./dist/dropdown-menu.mjs"
+      },
+      "require": {
+        "types": "./dist/dropdown-menu.d.ts",
+        "default": "./dist/dropdown-menu.js"
+      }
+    },
+    "./checkbox": {
+      "import": {
+        "types": "./dist/checkbox.d.mts",
+        "default": "./dist/checkbox.mjs"
+      },
+      "require": {
+        "types": "./dist/checkbox.d.ts",
+        "default": "./dist/checkbox.js"
+      }
+    },
+    "./label": {
+      "import": {
+        "types": "./dist/label.d.mts",
+        "default": "./dist/label.mjs"
+      },
+      "require": {
+        "types": "./dist/label.d.ts",
+        "default": "./dist/label.js"
+      }
+    },
+    "./radio-group": {
+      "import": {
+        "types": "./dist/radio-group.d.mts",
+        "default": "./dist/radio-group.mjs"
+      },
+      "require": {
+        "types": "./dist/radio-group.d.ts",
+        "default": "./dist/radio-group.js"
+      }
+    },
+    "./select": {
+      "import": {
+        "types": "./dist/select.d.mts",
+        "default": "./dist/select.mjs"
+      },
+      "require": {
+        "types": "./dist/select.d.ts",
+        "default": "./dist/select.js"
+      }
+    },
+    "./separator": {
+      "import": {
+        "types": "./dist/separator.d.mts",
+        "default": "./dist/separator.mjs"
+      },
+      "require": {
+        "types": "./dist/separator.d.ts",
+        "default": "./dist/separator.js"
+      }
+    },
+    "./switch": {
+      "import": {
+        "types": "./dist/switch.d.mts",
+        "default": "./dist/switch.mjs"
+      },
+      "require": {
+        "types": "./dist/switch.d.ts",
+        "default": "./dist/switch.js"
+      }
+    },
+    "./slider": {
+      "import": {
+        "types": "./dist/slider.d.mts",
+        "default": "./dist/slider.mjs"
+      },
+      "require": {
+        "types": "./dist/slider.d.ts",
+        "default": "./dist/slider.js"
+      }
+    },
+    "./tabs": {
+      "import": {
+        "types": "./dist/tabs.d.mts",
+        "default": "./dist/tabs.mjs"
+      },
+      "require": {
+        "types": "./dist/tabs.d.ts",
+        "default": "./dist/tabs.js"
+      }
+    },
+    "./context-menu": {
+      "import": {
+        "types": "./dist/context-menu.d.mts",
+        "default": "./dist/context-menu.mjs"
+      },
+      "require": {
+        "types": "./dist/context-menu.d.ts",
+        "default": "./dist/context-menu.js"
+      }
+    },
+    "./popover": {
+      "import": {
+        "types": "./dist/popover.d.mts",
+        "default": "./dist/popover.mjs"
+      },
+      "require": {
+        "types": "./dist/popover.d.ts",
+        "default": "./dist/popover.js"
+      }
+    },
+    "./tooltip": {
+      "import": {
+        "types": "./dist/tooltip.d.mts",
+        "default": "./dist/tooltip.mjs"
+      },
+      "require": {
+        "types": "./dist/tooltip.d.ts",
+        "default": "./dist/tooltip.js"
+      }
+    },
+    "./hover-card": {
+      "import": {
+        "types": "./dist/hover-card.d.mts",
+        "default": "./dist/hover-card.mjs"
+      },
+      "require": {
+        "types": "./dist/hover-card.d.ts",
+        "default": "./dist/hover-card.js"
+      }
+    },
+    "./alert-dialog": {
+      "import": {
+        "types": "./dist/alert-dialog.d.mts",
+        "default": "./dist/alert-dialog.mjs"
+      },
+      "require": {
+        "types": "./dist/alert-dialog.d.ts",
+        "default": "./dist/alert-dialog.js"
+      }
+    },
+    "./avatar": {
+      "import": {
+        "types": "./dist/avatar.d.mts",
+        "default": "./dist/avatar.mjs"
+      },
+      "require": {
+        "types": "./dist/avatar.d.ts",
+        "default": "./dist/avatar.js"
+      }
+    },
+    "./aspect-ratio": {
+      "import": {
+        "types": "./dist/aspect-ratio.d.mts",
+        "default": "./dist/aspect-ratio.mjs"
+      },
+      "require": {
+        "types": "./dist/aspect-ratio.d.ts",
+        "default": "./dist/aspect-ratio.js"
+      }
+    },
+    "./scroll-area": {
+      "import": {
+        "types": "./dist/scroll-area.d.mts",
+        "default": "./dist/scroll-area.mjs"
+      },
+      "require": {
+        "types": "./dist/scroll-area.d.ts",
+        "default": "./dist/scroll-area.js"
+      }
+    },
+    "./progress": {
+      "import": {
+        "types": "./dist/progress.d.mts",
+        "default": "./dist/progress.mjs"
+      },
+      "require": {
+        "types": "./dist/progress.d.ts",
+        "default": "./dist/progress.js"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "lint": "eslint --max-warnings 0 src",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
+  },
+  "dependencies": {
+    "@radix-ui/primitive": "workspace:*"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@vitest/ui": "^2.1.8",
+    "eslint": "^9.18.0",
+    "jsdom": "^26.0.0",
+    "typescript": "^5.7.3",
+    "tsup": "^8.3.6",
+    "vitest": "^2.1.8"
+  },
+  "homepage": "https://radix-ui.com/primitives",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radix-ui/primitives.git"
+  },
+  "bugs": {
+    "url": "https://github.com/radix-ui/primitives/issues"
+  }
+}
